@@ -7,7 +7,8 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import styles from './episode.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePlayer } from '@/contexts/PlayerContext';
+import Head from 'next/head';
 
 type Episode = {
     id: string;
@@ -27,8 +28,13 @@ type EpisodeProps = {
 
 export default function Episode({ episode }: EpisodeProps){
 
+    const { play } = usePlayer();
+
     return (
         <div className={styles.episode}>
+            <Head>
+                <title>{episode.title} | Podcastr</title>
+            </Head>
             <div className={styles.thumbnailContainer}>
                 <Link href="/">
                     <button type="button" className={styles.buttonPrevius}>
@@ -42,7 +48,7 @@ export default function Episode({ episode }: EpisodeProps){
                     alt={episode.title}
                     style={{objectFit:"cover"}} 
                 />
-                <button type="button" className={styles.buttonPlay}>
+                <button type="button" className={styles.buttonPlay} onClick={() => play(episode)}>
                     <img src="/play.svg" alt="Tocar episódio" />
                 </button>
             </div>

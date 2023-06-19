@@ -63,7 +63,7 @@
 
         align-self: stretch;
 
-        &.empty{
+        &.empty .progress{
             opacity: .5;
 
             button{
@@ -110,6 +110,14 @@
 
                 transition: filter 0.2s;
 
+                &:disabled{
+                    opacity: 0.5;
+
+                    &:hover{
+                        cursor: default;
+                    }
+                }
+
                 &:hover:not(:disabled){
                     filter: brightness(0.8);
                 }
@@ -123,6 +131,14 @@
 
                     &:hover:not(:disabled){
                         filter: brightness(0.95);
+                    }
+                }
+
+                &.isActive{
+                    filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+
+                    &:hover{
+                        filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
                     }
                 }
             }
